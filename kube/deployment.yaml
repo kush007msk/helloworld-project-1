@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: gcr.io/rich-tine-385605/helloworld@sha256:97e6c656633468ef772cba3ed5196f751c31b3a820e5a5f97be8c125e84330ac
+        image: gcr.io/rich-tine-385605/helloworld:latest
         ports:
         - containerPort: 80
         - containerPort: 443
