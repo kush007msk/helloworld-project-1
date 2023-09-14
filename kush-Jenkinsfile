@@ -1,0 +1,29 @@
+pipeline{
+ agent {label 'master'}
+ options {
+        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+        ansiColor('xterm')
+    }
+     
+  tools{
+    jdk 'Java'
+    maven 'Maven'
+    }
+    parameters { 
+         string(name: 'Repo', defaultValue: 'helloworld-project-1', description: 'please choose repo to build')
+       choice(name: 'Branch', choices: ['main', 'develop', 'feature'], description: 'please choose branch to build') 
+    }
+stages{
+ stage ('Git clone'){
+    steps{
+     git branch: '${Branch}',
+     url: 'https://github.com/kush007msk/${Repo}'
+   }
+  }
+  stage ('Maven Build'){
+    steps{
+     sh 'mvn clean package'
+   }
+  }
+ }
+}
